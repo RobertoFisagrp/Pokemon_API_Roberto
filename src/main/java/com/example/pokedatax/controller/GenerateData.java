@@ -1,9 +1,9 @@
 package com.example.pokedatax.controller;
 
 import com.example.pokedatax.client.PokemonClientApi;
-import com.example.pokedatax.model.Pokemon;
-import com.example.pokedatax.model.Result;
+import com.example.pokedatax.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,14 +20,19 @@ public class GenerateData {
         if (pokemon != null){
             Result.ResultBuilder resultBuilder = Result.builder();
             resultBuilder.name(pokemon.getName());
-            resultBuilder.height(pokemon.getHeight());
-            resultBuilder.weight(pokemon.getWeight());
+            double height = pokemon.getHeight()/10;
+
+            resultBuilder.height(height);
+            double weight = pokemon.getWeight()/10;
+            resultBuilder.weight(weight);
             List<String> types = pokemon.getTypes()
                     .stream()
                     .map(Pokemon.Types::getType)
                     .map(Pokemon.TypeDetails::getName)
                     .collect(Collectors.toList());
-            resultBuilder.type(types);
+
+            String typesAsString = String.join(", ", types);
+            resultBuilder.type(typesAsString);
 
 
             List<String> stats = pokemon.getStats().stream().map(Pokemon.Stats::getBase_stat).collect(Collectors.toList());
