@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 public class TypeDetails {
     private String name;
+    private int id;
     private List<TypeDetail> doubleDamageFrom;
     private List<String> doubleDamageFromNames;
 

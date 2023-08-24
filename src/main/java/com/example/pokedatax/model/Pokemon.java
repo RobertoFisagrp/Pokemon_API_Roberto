@@ -16,13 +16,16 @@ public class Pokemon {
     private List<Types> types;
     private List<Stats> stats;
     private List<TypeDetails> weaknesses;
-    private List<flavor_text_entries> description;
+    private List<damage_relations> doubledamage;
+    private List<FlavorTextEntries> description;
 
 
     @Setter
     @Getter
     public static class Types{
+
         private TypeDetails type;
+
     }
 
 
@@ -40,11 +43,16 @@ public class Pokemon {
         private String name;
         private String url;
     }
+    @Setter
+    @Getter
+    public static class damage_relations{
+        private List<String> double_damage_from;
+    }
     @Builder
     @Getter
     @Setter
-    public static class flavor_text_entries{
-        private String flavor_text;
+    public static class FlavorTextEntries {
+        private String flavorText;
         private String name;
         private String version;
     }

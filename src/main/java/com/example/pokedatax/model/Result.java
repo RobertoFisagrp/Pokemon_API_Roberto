@@ -15,8 +15,8 @@ public class Result {
     private double weight;
     private String type;
     private List<String>stat;
-    private List<String> description;
-    private List<TypeDetails> weaknesses;
+    private String description;
+    private List<String> weaknesses;
 
     public static class ResultBuilder{
         @Override
@@ -28,7 +28,7 @@ public class Result {
             String special_defense = build().generateAsteriks(Integer.parseInt(stat.get(4)));
             String speed = build().generateAsteriks(Integer.parseInt(stat.get(5)));
             return "Pokedex \n" +
-                    " \n 1.- Name: '" + name + '\'' +
+                    " \n 1.- Name: " + name +
                     " \n 2.- Height:" + height +'m'+
                     " \n 3.- Weight:" + weight +"kg"+
                     "\n 4.- Description: " + description +

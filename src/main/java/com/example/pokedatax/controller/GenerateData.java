@@ -37,6 +37,22 @@ public class GenerateData {
 
             List<String> stats = pokemon.getStats().stream().map(Pokemon.Stats::getBase_stat).collect(Collectors.toList());
             resultBuilder.stat(stats);
+           /* String description = pokemon.getDescription().stream()
+                    .filter(desc -> "fr".equals(desc.getName()))
+                    .findFirst()
+                    .map(Pokemon.FlavorTextEntries::getFlavorText)
+                    .orElse("Description not found");
+            resultBuilder.description(description);
+
+            */
+
+
+            List<String> typesWeek = new ArrayList<>();
+            /*
+            pokemon.getWeaknesses().forEach(p-> {TypeDetails typeDetails = pokemonClientApi.getTypeDetails(p.getName());
+            typesWeek.add(typeDetails.getDoubleDamageFromNames().toString());});
+            resultBuilder.weaknesses(typesWeek);
+*/
             System.out.println(resultBuilder);
             return Optional.of(resultBuilder.build());
 

@@ -3,10 +3,14 @@ package com.example.pokedatax.model;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 @Builder
 @Getter
 public class PokemonDescription {
+
     private String flavor_text;
     private String name;
     private String version;
+
 }
