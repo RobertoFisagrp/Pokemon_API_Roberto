@@ -34,18 +34,24 @@ public class GenerateData {
             String typesAsString = String.join(", ", types);
             resultBuilder.type(typesAsString);
 
+            List<PokemonDescription> desc = new ArrayList<>();
+            desc.add(pokemonClientApi.getPokemonDescription(pokemon.getName()));
+            StringBuilder descriptionStr = new StringBuilder();
+            for (int i = 0; i < desc.get(0).getFlavor_text_entries().size(); i++) {
+                if(desc.get(0).getFlavor_text_entries().get(i).getLanguage().getName().equals("fr")){
+                    String description = desc.get(0).getFlavor_text_entries().get(i).getFlavor_text();
+                    descriptionStr.append(description);
+                    break;
+                }
+            }
+
+            resultBuilder.description(descriptionStr.toString());
+
+
+
 
             List<String> stats = pokemon.getStats().stream().map(Pokemon.Stats::getBase_stat).collect(Collectors.toList());
             resultBuilder.stat(stats);
-           /* String description = pokemon.getDescription().stream()
-                    .filter(desc -> "fr".equals(desc.getName()))
-                    .findFirst()
-                    .map(Pokemon.FlavorTextEntries::getFlavorText)
-                    .orElse("Description not found");
-            resultBuilder.description(description);
-
-            */
-
 
             List<String> typesWeek = new ArrayList<>();
             /*

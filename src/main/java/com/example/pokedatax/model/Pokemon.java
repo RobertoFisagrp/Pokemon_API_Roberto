@@ -17,7 +17,8 @@ public class Pokemon {
     private List<Stats> stats;
     private List<TypeDetails> weaknesses;
     private List<damage_relations> doubledamage;
-    private List<FlavorTextEntries> description;
+    private List<Description> description;
+    private String flavor_text;
 
 
     @Setter
@@ -50,8 +51,7 @@ public class Pokemon {
     }
     @Builder
     @Getter
-    @Setter
-    public static class FlavorTextEntries {
+    public static class Description {
         private String flavorText;
         private String name;
         private String version;

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface PokemonClientApi {
     @GetMapping("/pokemon/{pokemon}")
     Pokemon getDataPokemon(@PathVariable String pokemon);
-    @GetMapping("/pokemon-species/{name}/")
-    PokemonDescription getPokemonDescription(@PathVariable String name);
+    @GetMapping("/pokemon-species/{pokemon}")
+    PokemonDescription getPokemonDescription(@PathVariable String pokemon);
     @GetMapping("/type/{typeId}")
-    TypeDetails getTypeDetails(@PathVariable("typeId") String typeId);
+    TypeDetails getTypeDetails(@PathVariable String typeId);
 }

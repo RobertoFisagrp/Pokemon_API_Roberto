@@ -21,6 +21,7 @@ public class Result {
     public static class ResultBuilder{
         @Override
         public String toString() {
+             double max = Math.max(Math.max(name.length(),height),type.length());
             String hp = build().generateAsteriks(Integer.parseInt(stat.get(0)));
             String attack = build().generateAsteriks(Integer.parseInt(stat.get(1)));
             String defense = build().generateAsteriks(Integer.parseInt(stat.get(2)));
@@ -28,6 +29,7 @@ public class Result {
             String special_defense = build().generateAsteriks(Integer.parseInt(stat.get(4)));
             String speed = build().generateAsteriks(Integer.parseInt(stat.get(5)));
             return "Pokedex \n" +
+                    build().generateGuideline(max)+
                     " \n 1.- Name: " + name +
                     " \n 2.- Height:" + height +'m'+
                     " \n 3.- Weight:" + weight +"kg"+
@@ -40,17 +42,30 @@ public class Result {
                     "\n \t \t defense -> " + defense +
                     "\n \t \t special-attack -> " + special_attack +
                     "\n \t \t special-defense -> " + special_defense +
-                    "\n \t \t speed ->" + speed
+                    "\n \t \t speed ->" + speed+"\n"+ build().generateGuideline(max)
                     ;
         }
     }
     public String generateAsteriks(int value){
         StringBuilder asteriks= new StringBuilder();
+        if(value/10 == 0){
+            asteriks.append("☆");
+            // Para estadisticas menores de 10 se le agrega una estrella personalizada para denotar la diferencia
+        }
+
         for (int i = 0; i < value/10; i++) {
             asteriks.append("*");
-            
+
         }
         return asteriks.toString();
+    }
+    public String generateGuideline(double value){
+        StringBuilder guideLines = new StringBuilder();
+        for (int i = 0; i < value; i++) {
+            guideLines.append("-");
+
+        }
+        return guideLines.toString();
     }
 
 }
