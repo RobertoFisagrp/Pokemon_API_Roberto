@@ -4,12 +4,14 @@ import com.example.pokedatax.client.PokemonClientApi;
 import com.example.pokedatax.model.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class GenerateData {
     private Pokemon pokemon;
+
     private PokemonClientApi pokemonClientApi;
 
     public GenerateData(Pokemon pokemon, PokemonClientApi pokemonClientApi) {
@@ -53,13 +55,31 @@ public class GenerateData {
             List<String> stats = pokemon.getStats().stream().map(Pokemon.Stats::getBase_stat).collect(Collectors.toList());
             resultBuilder.stat(stats);
 
+            List<TypeDetails>typesDetail = new ArrayList<>();
+
+            List<String> typesAsList = new ArrayList<>(Arrays.asList(typesAsString.split(",")));
+            typesDetail.add(pokemonClientApi.getTypeDetails(typesAsList.get(0)));
+
+
             List<String> typesWeek = new ArrayList<>();
-            /*
-            pokemon.getWeaknesses().forEach(p-> {TypeDetails typeDetails = pokemonClientApi.getTypeDetails(p.getName());
-            typesWeek.add(typeDetails.getDoubleDamageFromNames().toString());});
-            resultBuilder.weaknesses(typesWeek);
-*/
+            StringBuilder weaknesses = new StringBuilder();
+
+            for (int i = 0; i < typesDetail.get(0).getDamage_relations().getDouble_damage_from().size(); i++) {
+                weaknesses.append(typesDetail.get(0).getDamage_relations().
+                        getDouble_damage_from().
+                        get(i).getName()).append(" ");
+            }
+            if(typesAsList.size()>1){
+                typesDetail.add(pokemonClientApi.getTypeDetails(typesAsList.get(1).replace(" ","")));
+                for (int i = 0; i < typesDetail.get(1).getDamage_relations().getDouble_damage_from().size(); i++) {
+                    weaknesses.append(typesDetail.get(1).getDamage_relations().
+                            getDouble_damage_from().
+                            get(i).getName()).append(" ");
+                }
+            }
+            resultBuilder.weaknesses(weaknesses.toString());
             System.out.println(resultBuilder);
+            System.out.println();
             return Optional.of(resultBuilder.build());
 
         }

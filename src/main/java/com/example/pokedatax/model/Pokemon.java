@@ -19,8 +19,6 @@ public class Pokemon {
     private List<damage_relations> doubledamage;
     private List<Description> description;
     private String flavor_text;
-
-
     @Setter
     @Getter
     public static class Types{
@@ -34,6 +32,7 @@ public class Pokemon {
     @Getter
     public static class TypeDetails{
         private String name;
+        private int id;
         private List<TypeDetails> weaknesses;
 
     }

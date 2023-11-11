@@ -16,12 +16,12 @@ public class Result {
     private String type;
     private List<String>stat;
     private String description;
-    private List<String> weaknesses;
+    private String weaknesses;
 
     public static class ResultBuilder{
         @Override
         public String toString() {
-             double max = Math.max(Math.max(name.length(),height),type.length());
+             double max = Math.max(Math.max(name.length(),height),Math.max(type.length(),weaknesses.length()));
             String hp = build().generateAsteriks(Integer.parseInt(stat.get(0)));
             String attack = build().generateAsteriks(Integer.parseInt(stat.get(1)));
             String defense = build().generateAsteriks(Integer.parseInt(stat.get(2)));
@@ -35,8 +35,8 @@ public class Result {
                     " \n 3.- Weight:" + weight +"kg"+
                     "\n 4.- Description: " + description +
                     "\n 5.- Type: " + type +
-                    "\t 6.- weaknesses:" + weaknesses +
-                    "\n  7.- Base point " +
+                    "\t 6.- weaknesses: " + weaknesses +
+                    "\n 7.- Base point " +
                     "\n \t \t hp ->" + hp +
                     "\n \t \t attack -> " + attack +
                     "\n \t \t defense -> " + defense +
